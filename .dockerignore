@@ -1,0 +1,13 @@
+.idea
+.vscode
+.DS_Store
+
+/coverage
+/dist
+/node_modules
+
+.env
+.env.development
+.env.homologation
+.env.production
+.env.test

@@ -1,0 +1,85 @@
+version: '3.6'
+services:
+    tpt_db:
+        container_name: tpt_db
+        deploy:
+            mode: replicated
+            replicas: 1
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+                window: 60s
+            resources:
+                limits:
+                    memory: 256M
+        environment:
+            MONGO_INITDB_DATABASE: tpt
+            MONGO_INITDB_ROOT_PASSWORD: root
+            MONGO_INITDB_ROOT_USERNAME: root
+        image: mongo:3.4.19
+        networks:
+            main:
+                aliases:
+                    - tpt_db
+        ports:
+            - 27017:27017
+        restart: "no"
+
+    tpt_logs:
+        container_name: tpt_logs
+        depends_on:
+            - tpt_db
+        deploy:
+            mode: replicated
+            replicas: 1
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+                window: 60s
+            resources:
+                limits:
+                    memory: 256M
+        environment:
+            cluster.name: "tpt_logs"
+            discovery.type: "single-node"
+        image: elasticsearch:6.5.4
+        networks:
+            main:
+                aliases:
+                    - tpt_logs
+        ports:
+            - 9200:9200
+        restart: "no"
+
+    tpt_reports:
+        container_name: tpt_reports
+        depends_on:
+            - tpt_logs
+        deploy:
+            mode: replicated
+            replicas: 1
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+                window: 60s
+            resources:
+                limits:
+                    memory: 256M
+        environment:
+            ELASTICSEARCH_URL: "http://tpt_logs:9200/"
+            KIBANA_DEFAULTAPPID: "tpt_reports"
+            SERVER_NAME: "tpt_reports"
+        image: kibana:6.5.4
+        networks:
+            main:
+                aliases:
+                    - tpt_reports
+        ports:
+            - 5601:5601
+        restart: "no"
+
+networks:
+    main:
