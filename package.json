@@ -8,7 +8,7 @@
         "historical": "^2.0.0",
         "i18next": "^12.1.0",
         "jsonwebtoken": "^8.5.0",
-        "moment": "^2.24.0",
+        "moment": "^2.29.2",
         "moment-timezone": "^0.5.23",
         "mongo-sanitize": "^1.0.1",
         "mongoose": "^5.4.16",
