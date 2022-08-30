@@ -9,7 +9,7 @@
         "i18next": "^12.1.0",
         "jsonwebtoken": "^8.5.0",
         "moment": "^2.24.0",
-        "moment-timezone": "^0.5.23",
+        "moment-timezone": "^0.5.35",
         "mongo-sanitize": "^1.0.1",
         "mongoose": "^5.4.16",
         "mongoose-seed": "^0.6.0",
