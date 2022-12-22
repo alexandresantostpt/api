@@ -7,7 +7,7 @@
         "firebase-admin": "^7.2.0",
         "historical": "^2.0.0",
         "i18next": "^12.1.0",
-        "jsonwebtoken": "^8.5.0",
+        "jsonwebtoken": "^9.0.0",
         "moment": "^2.24.0",
         "moment-timezone": "^0.5.23",
         "mongo-sanitize": "^1.0.1",
